@@ -36,7 +36,8 @@ payable contract VotingApp =
     let updatedVoteCount = coolCat.voteCount + Call.value
     let updatedcoolCats = state.coolCats{ [index].voteCount = updatedVoteCount }
     put(state{ coolCats = updatedcoolCats })';
-const contractAddress = '';
+
+const contractAddress = 'ct_24efgFXcGcAcyW428EUkb874mY8ABWTF4PgauHgrs9n3N9C7NL';
 var coolcats_data = [];
 var memeLength = 0;
 var client = null;
@@ -47,17 +48,31 @@ function renderMemes() {
   var template = $('#template').html();
   Mustache.parse(template);
   var rendered = Mustache.render(template, {coolcats_data});
-  $('#memeBody').html(rendered);
+  $('#coolCat_body').html(rendered);
 }
 
+async function callStatic(func, args) {
+const contract = await client.getContractInstance(contractSource, {contractAddress});
+const calledGet = await contract.call(func, args, {callStatic: true}).catch(e => console.error(e));
+const decodedGet = await calledGet.decode().catch(e => console.error(e));
+
+return decodedGet;
+}
+
+
 window.addEventListener('load', async () => {
+  coolCats_Length = await callStatic('getLength', []);
 
-  const contract = await client.getContractInstance(contractSource, {contractAddress});
-  const calledGet = await contract.call('getLength', [], {callStatic: true}).catch(e => console.error(e));
-  console.log('calledGet', calledGet);
+  for (let i = 1; i <= coolCats_Length; i++) {
 
-  const decodedGet = await calledGet.decode().catch(e => console.error(e));
-  console.log('decodedGet', decodedGet);
+    const coolCat = await callStatic('getCool_cat', [i]);
+    coolcats_data.push({
+      candidateName: coolCat.name,
+      coolcat_image: coolCat.image,
+      index: i,
+      votes: coolCat.voteCount,
+    })
+  }
 
 renderMemes();
 });
