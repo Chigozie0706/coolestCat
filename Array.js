@@ -62,6 +62,8 @@ return decodedGet;
 
 
 window.addEventListener('load', async () => {
+
+   client = await Ae.Aepp()
   coolCats_Length = await callStatic('getLength', []);
 
   for (let i = 1; i <= coolCats_Length; i++) {
