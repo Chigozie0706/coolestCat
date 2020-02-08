@@ -1,4 +1,4 @@
-const contractSource = '
+const contractSource = `
 payable contract VotingApp =
 
   record coolCat = {
@@ -35,7 +35,8 @@ payable contract VotingApp =
     let coolCat = getCool_cat(index)
     let updatedVoteCount = coolCat.voteCount + Call.value
     let updatedcoolCats = state.coolCats{ [index].voteCount = updatedVoteCount }
-    put(state{ coolCats = updatedcoolCats })';
+    put(state{ coolCats = updatedcoolCats })
+    `
 
 const contractAddress = 'ct_24efgFXcGcAcyW428EUkb874mY8ABWTF4PgauHgrs9n3N9C7NL';
 var coolcats_data = [];
