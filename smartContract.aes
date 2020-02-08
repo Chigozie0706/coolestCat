@@ -1,0 +1,37 @@
+payable contract VotingApp =
+
+  record coolCat = {
+    name           : string,
+    image          : string,
+    voteCount      : int
+    }
+
+  record state = {
+    coolCats : map( int, coolCat ),
+    length : int
+    }
+
+  entrypoint init() = {
+    coolCats = {},
+    length = 0
+    }
+
+  entrypoint getCool_cat(index : int) : coolCat =
+    switch(Map.lookup(index, state.coolCats))
+	    None    => abort("There was no coolCat with this index registered.")
+	    Some(x) => x
+
+
+  stateful entrypoint updateCool_cat(name' : string, image' : string) =
+    let coolCat = {name = name', image = image', voteCount = 0}
+    let index = getLength() + 1
+    put(state{coolCats[index] = coolCat, length = index})
+
+  entrypoint getLength() : int =
+    state.length
+
+  payable stateful entrypoint voteCool_Cat(index : int) =
+    let coolCat = getCool_cat(index)
+    let updatedVoteCount = coolCat.voteCount + Call.value
+    let updatedcoolCats = state.coolCats{ [index].voteCount = updatedVoteCount }
+    put(state{ coolCats = updatedcoolCats })

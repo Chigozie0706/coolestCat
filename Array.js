@@ -62,8 +62,8 @@ return decodedGet;
 
 
 window.addEventListener('load', async () => {
-
-   client = await Ae.Aepp()
+ //Initialize the Aepp object through aepp-sdk.browser.js, the base app needs to be running.
+ client = await Ae.Aepp();
   coolCats_Length = await callStatic('getLength', []);
 
   for (let i = 1; i <= coolCats_Length; i++) {
