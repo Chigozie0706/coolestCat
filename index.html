@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title><img src="coolcat logo.png"> COOLESTCAT</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>COOLESTCAT</title>
+
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="stylesheet" type="text/css" href="./css/scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="fontawesome-free-5.10.2-web">
+
 </head>
-<div id="scrollbar"> 
+<div id="scrollbar">
 <body>
 
 <!-- This is the navigation bar section -->
@@ -23,7 +26,7 @@
 	 <a class = "nav-link" href="index.html">HOME</a>
 	</li>
 	<li class="nav-item">
-	 <a class = "nav-link" href="#">UPLOAD COOLCAT</a>
+	 <a class = "nav-link" href="#registerBtn">UPLOAD COOLCAT</a>
 	</li>
 	<li class="nav-item">
 	 <a class = "nav-link" href="#votebtn">VOTE</a>
@@ -47,7 +50,7 @@
 			<p>Coolestcat is a free online voting platform where everyone can upload a picture of a coolcat as a candidate or vote the coolest cat of your choice. The Coolestcat with the higest number of vote gets to win. Lets get Started....</p>
 		</div>
 	<div class="button1">
-	 <a href="#" class="btn-sty1">UPLOAD COOLCAT</a>
+	 <a href="#registerBtn" class="btn-sty1">UPLOAD COOLCAT</a>
 	 <a href="#" class="btn-sty2" id="votebtn">VOTE</a>
 	 </div>
 	</div>
@@ -59,39 +62,35 @@
 <!-- This is the form section of the images -->
 <div class="form2">
  <form  class="form3">
-   Name: <input type="text" id="registerName"><br>
-	 Email: <input type="text" id="registerEmail"><br>
-  <input type="file"  id="uploadImage"><br>
-        <a href="#" class="btn-sty1" id="registerBtn">UPLOAD</a>
-    </form>
+	 Name: <input type="text" id="registerName"><br>
+	 Image_Url: <input type="text" id="uploadImage"><br>
+   <a href="#" class="btn-sty1" id="registerBtn">UPLOAD</a>
+  </form>
  </div>
 <br>
-
-<div class="copyright">
-</div>
-
 
 <!-- This is the Mustache.js section -->
 <div id="memeBody">
 	</div>
-			<script id="template" type="x-tmpl-mustache">
-			 {{#coolcats_data}}
+
+<script id="template" type="x-tmpl-mustache">
+	{{#coolcats_data}}
 				<div id="slides" class="carousel slide" data-ride ="carousel" >
 					<div class="carousel-inner images" >
 						<div class="carousel-item active">
 							<img class="img-responsive" src="{{coolcat_image}}">
 								<div class="carousel-caption">
 								 <h3>{{votes}}</h3>
-			  <div class="form1">
+			<div class="form1">
 			<input type="number" placeholder="aetoes" class="input1" id={{index}}>
 			<button onclick="myFunction()" id={{index}}>VOTE</button>
 			</div>
-							</div>
-						</div>
+				</div>
+					</div>
 					</div>
 				</div>
 			<br>
-   {{/coolcats_data}}
+ {{/coolcats_data}}
 </script>
 
 
