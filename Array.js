@@ -40,11 +40,11 @@ payable contract VotingApp =
 
 const contractAddress = 'ct_24efgFXcGcAcyW428EUkb874mY8ABWTF4PgauHgrs9n3N9C7NL';
 var coolcats_data = [];
-var memeLength = 0;
+var coolcatLenght = 0;
 var client = null;
 
 
-function renderMemes() {
+function renderCoolcat() {
   coolcats_data = coolcats_data.sort(function(a,b){return b.votes-a.votes})
   var template = $('#template').html();
   Mustache.parse(template);
@@ -77,7 +77,7 @@ window.addEventListener('load', async () => {
     })
   }
 
-renderMemes();
+renderCoolcat();
 });
 
 $('#registerBtn').click(async function(){
@@ -91,5 +91,5 @@ coolcats_data.push({
     index: coolcats_data.length+1,
     votes: 0
   })
-  renderMemes();
+  renderCoolcat();
 });
